@@ -1,0 +1,461 @@
+					CURSO GIT BY FERNANDO HERRERA DE UDEMY
+
+
+			VIDEO 07 PRIMEROS COMANDOS ÚTILES
+
+NOTA: cuando un comando lleve un -- luego va a ir una palabra completa:
+>git --version
+Cuando solo venga un - son abreviaturas:
+>git commit -am (--add --message)
+Otro comando útil es git help:
+>git help
+
+Y si quiero información sobre un comando en especial:
+>git help <comando> por ejemplo git help commit
+
+Bien,lo primero es establecer las credenciales:
+>git config --global user.name "mi_name"
+>git config --global user.email "mi_email"
+
+					VIDEO 08 PRIMER REPOSITORIO
+
+Normalmente un repositorio refleja un único proyecto.Asi pues,nos bajamos el proyecto que nos deja FH.Inicializamos un repositorio local de git:
+>git init
+TIP: puedo configurar como se llamará la rama principal(ya que se va a llamar master siempre y puede que quiera que se llame main):
+>git config --global init.defaultBranch <name>
+
+Recuerda que git init crea un folder oculto .git que puedo borrar para dejar de dar seguimiento a ese repo/proyecto/folder.
+
+Otro comando interesante es git status,que me da información general:
+>git status
+Fijate que mientras git no dé seguimiento a un archivo o directorio no podrá guardar sus diferentes versiones.Hay que añadirlos:
+>git add file | -vA | . | --all 
+
+TIP: si quisiera remover un file del stage es con git reset:
+>git reset index.html <- obviamente si lo quiero(fijate que no lo borra,eso es con remove)
+
+Una vez con el stage con los files que quiero dar seguimiento hay que sacarle una fotografia,con git commit:
+>git commit -m "first commit"
+
+IMPORTANTE:si hago un git init sobre un repositorio ya inicializado Git simplemente lo reinicializará,pero no borra nada,no se pierde nada
+
+						NOTA SOBRE CRLF
+
+Para evitar el warning o incluso posibles errores por el último carácter de cada linea puedo configurarlos como CRLF todos:
+>git config --global core.autocrlf true
+
+La representación de salto de línea en archivos puede ser de varias formas: en sistemas Unix (incluyendo Linux, MacOS > versión 9, etc) se usa el carácter LF (\n); en sistemas Windows se usa CR+LF (\n+\r); en MacOS < versión 9 se usa CR (\r).
+
+			VIDEO 10 RESUMEN Y REVERTIR CAMBIOS
+
+Una vez echo un commit,puedo revertir los cambios al último commit:
+>git checkout -- . <- ojo con el punto
+Git reconstruirá todos los files y directorios a los que esté dando seguimiento al estado de ese commit
+
+		VIDEO 12 CAMBIAR NOMBRE A LA RAMA MASTER
+
+Para poder ver la rama en la que estoy tengo el comando git branch.Me indicará con un asterisco la rama en la que estoy.
+>git branch 
+
+Puedo ver que estoy en master,la vamos a cambiar a main:
+>git branch -m master main <- cambiar de 'master' a 'main'
+
+Sin embargo,no quiero hacer esto por cada repositorio:
+>git config --global init.defaultBranch main
+Siempre puedo revisar los archivos de configuración globales con :
+>git config --global -e
+
+Y puedo ver el registro de los commits con git log:
+>git log
+
+commit 1e29ae0ee7d90f0e5e6a981bea0c1ae9c46fb15d (HEAD -> main)
+Author: Oscar <oscargm28@hotmail.com>
+Date:   Sat Aug 20 11:36:25 2022 +0200
+
+    README added <- message del commit
+
+commit a87fbae1041205c17e3941811156f821961df014
+Author: Oscar <oscargm28@hotmail.com>
+Date:   Sat Aug 20 11:33:25 2022 +0200
+
+   first commit <- message del commit
+
+Normalmente se modifica la salida de este comando para que no suelte tanta información.
+
+					VIDEO 14 COMMITS DESDE VSCODE
+
+Puedo hacer los commits desde VSC(CTRL+SHIFT+G para ir a Source Code).Fijate que tras realizar un cambio veré la M sobre ese file y que tengo un icono para el git diff,otro para el git reset y otro para el git add por cada file.
+
+		VIDEO 15 WILDCARDS - DIFERENTES FORMAS DE AGREGAR AL STAGE
+
+Imaginando que quiero tomar todos los html,es decir,por extensión:
+>git add *.html <- agregar archivos por extensión
+
+Si estuvieran en una carpeta.
+>git add js/*.html <- desde las ultimas versiones Git hace la busqueda recursiva en el git add,no es necesario ya.
+
+IMPORTANTE: cuando creo un directorio y está vacio Git no le dará seguimiento hasta que tenga algo en él(puedo usar .gitkeep o crear un file).
+Esto puedo ser muy importante en carpetas como upload,que puede que al principio esté vacío ese folder hasta que se suba algo,pero si no estuviera ese folder daría error toda subida.Hay que crear un .gitkeep para esos folders.
+
+				VIDEO 17 CREAR ALIAS
+
+Dado que muchos comandos se suelen usar con flags es buena idea crear alias:
+>git status --short <- es muy largo
+git config --global alias.<nombre_para_el_alias> <comando que ejecuta>
+Entonces,si quiero que ese comando vaya a la 's':
+git config --global alias.s "status --short"
+
+TIP:siempre puedo actualizarlos o borrarlos entrando a editarlos:
+>git config --global -e <- y lo borro o lo cambio
+Aunque también está la flag --unset alias.<name_of_the_alias>:
+git config --global --unset alias.s
+
+
+					SECCION 03 PROFUNDIZANDO EN GIT
+
+Dado que cada commit es una fotografia del sistema de ficheros podemos regresar en el tiempo a esos estados previos(puedo mover tanto todo el repo como solo un archivo a ese momento).
+Obviamente esto es super útil.
+
+			VIDEO 19 COMPARAR CAMBIOS EN LOS ARCHIVOS
+
+Imagina que tengo el file instalaciones.md al que le modifico algo.Realmente puede que no me acuerde de lo que habia antes.Pero puedo usar git diff <file>:
+
+>git diff <- dado que solo tengo un file no necesito pasarselo:
+
+Puedo ver las diferencias en colores
+diff --git a/instalaciones.md b/instalaciones.md
+index aa7684f..8d99a2d 100644
+--- a/instalaciones.md
++++ b/instalaciones.md
+@@ -1,5 +1,5 @@
+ # Pasos para instalar
+ Seguir estos pasos
+ ```
+-npm install
++yarn install
+ ```
+\ No newline at end of file
+
+
+El problema es que git diff es un poco dificil de leer en consola.
+Además,los compara por defecto contra el último commit,pero no contra el stage(para esto necesitaria la flag --staged)
+TIP: no usaremos más git diff desde cli,ya que el IDE permite realizar esto de una forma más legible(con click derecho)
+
+			VIDEO 20 ACTUALIZAR MENSAJE DEL COMMIT Y REVERTIR CAMBIOS
+
+Imaginando que haya metido un message mal tengo varias formas de arreglarlo:
+>git commit -m "instjfkalf" <- message incorrecto
+Puedo arreglarlo con la flag --amend(ojo que cambia el id del commit)
+>git commit --amend -m "instalaciones actualizadas"
+
+Y si me he dejado un cambio puedo hacer un git reset --soft moviendo el HEAD:
+>git reset --soft HEAD^ (es lo mismo que HEAD^1)
+* El HEAD siempre apunta al último commit
+IMPORTANTISIMO: fijate que es --soft y que no pierdo los cambios que tengo en el IDE,con lo que solo tengo que usar git add + git commit)
+Este tip es fundamental para agregar al último commit otros cambios.Debe ser un --soft.
+
+NOTA: El caracter ^ está en desuso en GIT ahora se usa ~
+IMPORTANTE: --soft sólo llega al stage,no llega al working directory(esto es con --mixed).Asi que puedo usar --soft y no borraré mis cambios actuales.
+
+					VIDEOS 22-23 VIAJES EN EL TIEMPO
+
+Fijate que git reset --soft <commitId> y git reset --mixed <commitId> son muy parecidos,ninguno parece agresivo.
+No sucede lo mismo con git reset --hard <commitId>,aunque realmente también son revertibles sus cambios.Sin embargo necesitaré de 'git reflog' para ver el hash del commit:
+
+Este comando muestra todas las referencias en orden reciente:
+
+oscar@acer-linux:/media/oscar/CRUCIALX6/GitCoursesFH/Material-Heroes$ git reflog
+d047d6a (HEAD -> main) HEAD@{0}: reset: moving to HEAD~1
+27fe358 HEAD@{1}: reset: moving to 27fe358
+2ae14f5 HEAD@{2}: reset: moving to 2ae14f5
+2ae14f5 HEAD@{3}: reset: moving to 2ae14f5
+41e9748 HEAD@{4}: commit: Heroes.md: Robin y Linterna Verde added
+a413838 HEAD@{5}: reset: moving to HEAD^1
+69ec15e HEAD@{6}: commit: Agregamos a Linterna verde
+a413838 HEAD@{7}: commit (amend): Agregamos la historia de Batman y Superman
+d2f94ca HEAD@{8}: commit: Agregado el folder historia/
+2ae14f5 HEAD@{9}: commit: Ciudades.md agregado
+27fe358 HEAD@{10}: commit: Heroes.md agregado
+d047d6a (HEAD -> main) HEAD@{11}: commit: Misiones.md agregado
+771b856 HEAD@{12}: commit (initial): README agregado
+
+Fijate que tengo identificado si fue un commit o un reset.Como ya tengo visión sobre el hash puedo volver al commit donde se agregó a Robin y Linterna Verde:
+>git reset --hard 41e9748 <- te cagaz
+
+Fijate que git reset --soft y git reflog son indispensables.
+TIP: reset --soft no saca los archivos del staging area(tendria que sacarlos yo) mientras que --mixed,que es básicamente un --soft,si que lo hace,teniendo que volver a decidir yo cual va y cual no
+
+Soft
+    "Oculta" los commits posteriores al commit al que estas haciendo el reset
+    Conserva los cambios en el stage area
+    Conserva los cambios que tengas en tus archivos (working directory)
+
+Mixed
+    "Oculta" los commits posteriores al commit al que estas haciendo el reset
+    Deshace los cambios en el stage area
+    Conserva los cambios que tengas en tus archivos (working directory)
+
+Hard
+    "Oculta" los commits posteriores al commit al que estas haciendo el reset
+    Deshace los cambios en el stage area
+    Deshace los cambios que tengas en tus archivos (working directory)
+
+		VIDEO 24 CAMBIAR NOMBRE Y ELIMINAR ARCHIVOS MEDIANTE GIT
+
+Sorpresivamente puedo renombrar archivos con git:
+>git mv ciudades.md cities.md 
+La sintaxis es git mv <oldName> <newName>
+NOTA: si hago un git status veré esta información
+
+Y de igual manera también puedo eliminar un file con git
+>git rm salvar-mundo.md 
+La sintaxis es git rm <fileName>
+
+Sin embargo,borrar con git lo que hace es llevar ese file al stage,es decir,que hasta que no haga un commit no pierdo el file.Interesante
+
+NOTA: puedo hacer un git reset --hard sin especificar el puntero para que mueva todo el filesystem del proyecto al último commit(fijate que es igual que git checkout -- .)
+
+		VIDEO 25 ELIMINAR Y CAMBIAR NOMBRES DE ARCHIVOS SIN USAR GIT
+
+Realmente no es muy común usar Git para cambiar nombres y/o eliminar files,sino que se suele usar el SO actual.
+
+Git es muy bueno analizando cambios,y si por ejemplo cambio el file a un archivo le pondrá una R de Renamed(lo puedo ver en el IDE):
+R  historia/superman.historia.md -> historia/superman.md
+Lo mismo para deleted,que los marca con una D.
+
+				VIDEO 26 IGNORANDO ARCHIVOS Y DIRECTORIOS
+
+Para ignorar archivos hay que crear el file .gitignore.Esta práctica es básica.
+Dentro de ese archivo simplemente tengo que especificar los nombres de directorios o files que quiero ignorar y no darles seguimiento.
+
+NOTA: el .gitignore va a la misma altura de la carpeta .git.Normalmente en la raiz del proyecto.
+
+			SECCION 04 RAMAS - MERGES - CONFLICTOS Y TAGS
+
+Una rama es una copia literal de como se encuentra el repo en ese momento.La idea de crear ramas es poder pasar fácilmente de una a otra,fusionarlas,eliminarlas,etc...
+
+				VIDEO 30 MERGE - UNIONES
+
+Hay tres posibles escenarios que se derivan de un merge:
+El primero es el fast-forward,en el que la rama atrasada avanza sin ningun problema hasta la que está mas adelantada.
+El segundo es la unión automática,donde git también hace la unión sin ningun problema. 
+El tercero es la unión manual,en la que git no puede resolver los conflictos y tengo que hacerlo yo de forma manual.
+NOTA: cuando Git entra en modo manual despues crea un commit nuevo el cual se conoce como el merge commit.
+
+IMPORTANTE: cuando haga el merge tengo que estar en la rama que recibirá los cambios,asi que tengo que ir a la rama atrasada si quiero adelantarla,claro:
+>git checkout master
+>git merge <rama_adelantada>
+
+oscar@acer-linux:/media/oscar/CRUCIALX6/GitCoursesFH/06-demo$ git merge rama-villanos 
+Actualizando 8bbc6b9..8af899b
+Fast-forward
+villanos.md | 5 +++++
+1 file changed, 5 insertions(+)
+create mode 100755 villanos.md
+
+Ahora podria borrar esa rama:
+>git branch -d rama-villanos
+
+IMPORTANTE: Git no va a dejar borrar una rama que tenga cambios que no han sido mergeados.Esto es otra feature increible.Puedo forzar el borrado con --force:
+>git branch -d rama-villanos -f 
+
+oscar@acer-linux:/media/oscar/CRUCIALX6/GitCoursesFH/06-demo$ git branch -d rama-del-arbol 
+error: La rama 'rama-del-arbol' no ha sido fusionada completamente.
+Si estás seguro de querer borrarla, ejecuta 'git branch -D rama-del-arbol'.
+
+NOTA: fijate que git branch -D es como git branch -d -f.No debo usarlo a no ser que sea lo que quiero.
+
+				VIDEO 31 MERGE CON UNION AUTOMATICA
+
+El caso anterior era muy simple,ya que una rama avanzaba y la otra no,llevando a que siempre sea un fast-forward de la rama atrasada tras posarme en ella y mergear la adelantada.
+Pero,que pasa si ambas ramas avanzaron?Es aqui donde git lg va a empezar a ser un poco más confuso:
+
+* 83cb433 - (hace 2 minutos) borramos a daredevil - Oscar (HEAD -> master)
+| * 610925f - (hace 5 minutos) notas agregadas al villanos.md - Oscar (rama-villanos)
+| * d8370b0 - (hace 6 minutos) agregamos a Doomsday - Oscar
+|/  
+* 8af899b - (hace 23 minutos) villanos.md Flash reverso agregado - Oscar
+* 6e33b38 - (hace 24 minutos) villanos.md agregado - Oscar
+* 8bbc6b9 - (hace 26 minutos) added rest to master - Oscar
+* 62c8a10 - (hace 5 años) Agregando el gitignore - Strider
+* ac0d374 - (hace 5 años) Borramos la historia de batman -
+
+Fijate que el último es el de master,pero solo porque están ordenados por tiempo,simplemente es el más reciente.Puedo ver tmb que hay otra rama que se bifurco desde el commit 8af899b.
+
+Bien,es momento de unificar las ramas,y ambas valen.
+git checkout master
+git merge rama-villanos
+
+Fijate que se me abre el IDE pidiendo el nombre del commit,pero no hubo conflictos realmente,pues ambas ramas no modificaron los mismos archivos.
+oscar@acer-linux:/media/oscar/CRUCIALX6/GitCoursesFH/06-demo$ git merge rama-villanos 
+Merge made by the 'ort' strategy.
+villanos.md | 5 ++++-
+1 file changed, 4 insertions(+), 1 deletion(-)
+
+NOTA: Git trabaja perfectamente con archivos que no son binarios(binarios son imagenes).Es decir que mientras sea texto,que lo será el 99% de las veces Git no fallará en los conflictos o la ausencia de ellos.
+Desafortunadamente,las estrategias de fast-forward y ort(antes era recursive) no siempre se van a dar,ya que muchas veces hay conflictos entre ramas.
+
+					VIDEO 32 UNIONES CON CONFLICTOS
+
+Es muy fácil simular un conflicto.Simplemente cambio en dos ramas diferentes la misma línea.En cuanto quiera mergear una de ellas en la otra tendré problemas.
+
+<<<<<<< HEAD
+1. Acabar con el plan de Lex Luthor.
+2. Crear la liga de la justicia.
+3. Buscar nuevos miembros que luchen por la justicia.
+4. Buscar comida para ellos.
+=======
+1. Acabar con el plan de Lex Luthor
+2. Crear la liga de la justicia
+3. Buscar nuevos miembros que sean superheroes
+>>>>>>> rama-conflicto
+
+Obviamente tengo que solucionarlo.Fijate que despues de resolver los conflictos tengo que añadir y commitear,y que si miro el estado veré UU <- wtf:
+
+oscar@acer-linux:/media/oscar/CRUCIALX6/GitCoursesFH/06-demo$ git s
+## master
+UU misiones.md
+
+				VIDEOS 33-34 TAGS -ETIQUETAS - GIT TAG
+
+Los tags o etiquetas no son más que una referencia a un commit específico en el tiempo.Normalmente los tags son usados para marcar releases de una app.
+
+Algunas compañias usan tags con nombres fancy como Android que usa nombres de dulces.
+
+Vamos a suponer que tenemos el repo preparado para subirlo a producción.
+
+Para crear un tag es muy simple(git tag <name>):
+>git tag super-release
+
+Bien,y si se pueden crear,como puedo verlos y borrarlos?:
+>git tag  <- para verlos
+super-release
+Para borrarlos es con git tag -d <name>
+>git tag -d super-release
+Deleted tag 'super-release'
+
+Sin embargo,estos nombres no dicen nada.Siempre debería usar un versionamiento semántico para tagear.Esto necesitará de --anotated(-a) y de un mensaje:
+
+>git tag -a v1.0.0 -m "Version 1.0.0" lista
+
+Bien,pero y si quiero taggear un commit anterior?(pues estoy tageando el commit actual):
+>git tag -a v.0.1.0 <hashCommit> -m "..."
+TIP: el hashCommit puede ser cualquier cosa,como HEAD^4 o inclusive el nombre de otro tag,aunque usaré un hash de un commit
+
+Asi que puedo tagear cualquier commit de forma muy sencilla.
+Por último el comando 'git tag' no da demasiada información sobre ese tag,solo su anotación.Si quiero ver más información tengo que usar 'git show <tag annotation>,por ejemplo:
+
+>git show v0.1.0 <- aqui si veré el autor,date,archivos,...
+
+oscar@acer-linux:/media/oscar/CRUCIALX6/GitCoursesFH/06-demo$ git show v1.0.0 
+tag v1.0.0
+Tagger: Oscar <oscargm28@hotmail.com>
+Date:   Fri Aug 26 16:22:36 2022 +0200
+
+Version 1.0.0 lista
+
+commit fd617a57e4997f893c175b4961bb5135f11b773b (HEAD -> master, tag: v1.0.0)
+Merge: e1ddd12 808539c
+Author: Oscar <oscargm28@hotmail.com>
+Date:   Fri Aug 26 16:06:57 2022 +0200
+
+    resolved conflicts
+
+Los tags son superútiles para poder marcar y despues diferenciar un commit/punto en concreto del repo.Más adelante los juntaremos con los tag-release
+
+					SECCION 05 GIT STASH Y GIT REBASE
+
+El stash es un lugar seguro,una bóveda a la cual puedo mover todos los cambios(inclusive archivos que no estoy dando seguimiento aún).Esta boveda tendrá de manera segura todos los cambios que hice desde el último commit.
+Cuando despues quiera hacer un commit tendré varios panoramas,igual que con un merge,pudiendo haber conflictos.
+Nuevamente el stash es como una boveda temporal.FH no recomienda usar el stash más que para un único movimiento.Es demasiado fácil confundir stashes,por eso sólo debo trabajar con uno.
+También veremos el rebase,y de nuevo tampoco se recomienda abusar de esta funcionalidad. 
+
+					VIDEO 37 GIT STASH
+
+Digamos que por alguna razón necesito deshacer todos los cambios de mi rama,pero no perderlos,solo deshacerlos temporalmente.Para esto esta el git stash:
+
+oscar@acer-linux:/media/oscar/CRUCIALX6/GitCoursesFH/07-demo-stash$ git stash
+Directorio de trabajo y estado de índice WIP on master: ee3852e added rest of md guardados
+NOTA: WIP es Work In Progress.Fijate que me guarda todo,no solo los archivos que le estaba dando seguimiento
+
+Y si escribo un git lg veré inclusive su referencia:
+*   733379a - (hace 84 segundos) WIP on master: ee3852e added rest of md - Oscar (refs/stash)
+
+Por última vez,todo lo que yo haya echo está almacenado en algun lugar llamado 'stash'.Puedo ver todo lo que tengo en el stash con git stash list:
+
+oscar@acer-linux:/media/oscar/CRUCIALX6/GitCoursesFH/07-demo-stash$ git stash list
+stash@{0}: WIP on master: ee3852e added rest of md
+
+Es muy recomendable usar sólo un stash(o muy pocos).
+
+Bien,fijate que ahora podria irme a otra rama,o introducir cambios en la misma.Sea como sea en algun momento querré recuperar lo que tenía en la bóveda con git stash pop:
+
+oscar@acer-linux:/media/oscar/CRUCIALX6/GitCoursesFH/07-demo-stash$ git stash pop
+En la rama master
+Cambios no rastreados para el commit:
+  (usa "git add <archivo>..." para actualizar lo que será confirmado)
+  (usa "git restore <archivo>..." para descartar los cambios en el directorio de trabajo)
+        modificados:     misiones.md
+
+sin cambios agregados al commit (usa "git add" y/o "git commit -a")
+Descartado refs/stash@{0} (733379a619f2a3fe83538ce4da80e52c68a86207)
+
+Fijate que hace el drop del stash(y si tuviera más,todos se correrian un indice hacia arriba).Todos los cambios que tenia en la boveda los tendré fisicamente en el repo de nuevo.
+
+Si quisiera recuperar un stash en específico(no recomendable tener varios):
+git stash apply stash@{n}
+
+Con git stash save "description" puedo crear un nombre personalizado
+
+					VIDEO 38 CONFLICTOS EN EL STASH
+
+Git puede usar auto-merging cuando tenga cambios tanto en el stash como en el commit que puede resolver.Sin embargo,si toco las mismas lineas hay tendré conflictos,es igual que un merge
+NOTA: cuando un git stash pop tenga conflictos no se va a eliminar solo(es como si ejecutara git stash apply)
+
+Para esto tengo git stash clear,ojo,que git stash clear borra todos los stash(aunque aún tengo git reflog y git reset --hard)
+
+NOTA: siempre que use varios stash es recomendable darles un nombre o no sabré cual recuperar,ya que cogen el nombre del commit sobre el que se basaron,simplemente:
+oscar@acer-linux:/media/oscar/CRUCIALX6/GitCoursesFH/07-demo-stash$ git stash list
+stash@{0}: WIP on master: 5a08140 readme updated: titulo objetivo <- dudas
+stash@{1}: WIP on master: 5a08140 readme updated: titulo objetivo <- dudas
+stash@{2}: On master: loki
+stash@{3}: WIP on master: 91a84fc merge con el stash successfully
+
+Pero y si quiero el 1 o el 2? Bien,todo el primer segmento hasta los ':' se puede ver como un identificador.Puedo usar 'git stash apply <id>':
+>git stash apply stash@{2}
+
+Y para borrar uno lo mismo pero con git stash drop <id>:
+>git stash drop stash@{1} 
+
+oscar@acer-linux$ git stash drop stash@{0} 
+Descartado stash@{0} (1a84f8c31ad65f904b7eb45c24f62924921380bf)
+
+Y si quiero una pequeña descripcion puedo usar 'git stash show <id>'
+oscar@acer-linux$ git stash show stash@{0} 
+ villanos.md | 1 +
+ 1 file changed, 1 insertion(+)
+
+Recuerda que es my buena idea darle un nombre al stash.Esto es básico.
+
+Y de nuevo,si quiero ver algo más de info que con show tengo --stat
+oscar@acer-linux$ git stash list --stat
+stash@{0}: On master: loki added
+
+ villanos.md | 1 +
+ 1 file changed, 1 insertion(+)
+
+TIP:recuerda que git stash pop selecciona el último y además lo elimina si hace el auto-merge.
+
+NOTA: en Windows puede que tenga que usar comillas:
+git stash show "stash@{1}"
+
+					VIDEOS 40-41 GIT REBASE 
+
+Fijate que tengo tres estrategias para mergear PRs(merge-squash, merge-rebase, y merge-commit):
+
+squash(merge --squash) junta todos los commits de la PR/rama y añade solo el último al historial de la rama a la que se va.
+rebase(merge --rebase): copia y pega todo el historial(replica) de toda la PR
+Merge-commit: puede ser interesante si en la PR hay varios commits con valor.Junta ambas features.
+Fijate que muchos recomiendan merge-commit(el clásico) para no perder trazabilidad y tener esa granularidad que pudiera ser necesaria.Interesting.
+
+

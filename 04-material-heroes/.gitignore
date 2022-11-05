@@ -1,0 +1,6 @@
+*.vue
+
+server.log
+
+dist/
+node_modules/
