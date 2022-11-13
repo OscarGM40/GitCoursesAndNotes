@@ -458,4 +458,40 @@ rebase(merge --rebase): copia y pega todo el historial(replica) de toda la PR
 Merge-commit: puede ser interesante si en la PR hay varios commits con valor.Junta ambas features.
 Fijate que muchos recomiendan merge-commit(el clásico) para no perder trazabilidad y tener esa granularidad que pudiera ser necesaria.Interesting.
 
+				VIDEO 65 CREANDO UN PR
+
+Un PR no es más que una rama que se desprendió en cierto momento de otra rama.Sin embargo esto no es todo,ya que es más que una simple rama.
+La idea de crear un PR es para que antes de hacer el merge con otra rama se la pueda evaluar a la PR,mediante ciertas herramientas(review de otros devs)
+
+HINT: fijate como hemos creado un file en el remoto y me da la opcion de commitearlo a la rama o sacar una PR para tener los beneficios de ésta.
+La opcion es 'propose new file' (tras haber creado uno con add file)
+
+Esto creará/abrirá la PR y me dejará elegir la rama contra la que mergearla,etc
+
+				VIDEO 66 GIT FETCH
+
+Para ver el fetch creamos un archivo historia.md y copio algo de código en él(esto en el remoto).
+Recuerda que el fetch sólamente actualiza las referencias de los commits,etc,puedo hacer un pull  y asi me bajo todo(aunque hay devs que hacen fetch + pull)
+
+			SECCION 08 GITHUB AVANZADO
+
+Veremos como crear feature-branches y dejarlas de manera vitalicia(para corregir errores de versiones pasadas).Nos moveremos a ese punto y arreglaremos algo
+Más adelante veremos como enlazar diferentes repositorios en diferentes plataformas.
+
+			VIDEOS 71-72 FORK,CLONE Y COLABORACIONES
+
+Si agrego un colaborador a un repo es como si fuera de ambos,los dos tenemos loñs mismos permisos,ojo, ambos podemos pushear.
+Esto no sucederá con el repo de otro user,aunque si le puedo hacer git clone y commits en local,nunca podría pushear un cambio.
+Aqui entra el concepto de un fork,que es clonar un repo entero en otro lugar(mi repo) al que si tengo acceso ya que es mio.
+Pero si además quisiera notificar a los dueños de ese repo inicial(digamos GoogleMaps) puedo crear desde mi fork una PR.
+
+NOTA: si estoy visitando el repo de cualquiera veré el botón de add-file pero obviamente no tengo permisos.Si intento crear un file en cualquier repo que no sea el mio automáticamente se crear un fork desde el que despues hacer una PR
+
+En cuanto forkee un repo iré al mio,creandose uno con el mismo nombre(en realidad pregunta por el nombre).
+Desde este repo remoto puedo hacer un git clone hacia local(tip: cuando se hace un git clone se queda enganchado el --set-upstream)
+
+				VIDEOS 73-74 PULL REQUEST
+
+Dado que el repo es un fork si le hago un push veré una nueva opción que dice contribute.En ella puedo crear una Pull Request hacia el repo forkeado.Genial.
+
 
