@@ -514,3 +514,10 @@ Por último creamos una release en GitHub
 
 En cuanto a flujos de trabajo,lo de siempre, no trabajar en el master y siempre usar feature/XXX 
 
+			VIDEO 80 FEATURE BRANCH - FLUJOS DE TRABAJO MEDIANTE PRs
+
+Normalmente el flujo de trabajo mediante feature branchs es lo más común,ya que estoy implementando una nueva caracteristica/feature de mi aplicación.
+
+Puedo probar a crear un file y darle ese naming a una rama feature/xxx y subir la PR.
+NOTA: con git branch -d <rama> borro una rama,con git branch -d -f(o --force) <rama> borro la rama pero sin importar si tuviera trabajo sin commitear(tengo que forzar para saltar el bloqueo inherente de Git)
+
