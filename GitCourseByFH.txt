@@ -494,4 +494,23 @@ Desde este repo remoto puedo hacer un git clone hacia local(tip: cuando se hace 
 
 Dado que el repo es un fork si le hago un push veré una nueva opción que dice contribute.En ella puedo crear una Pull Request hacia el repo forkeado.Genial.
 
+IMPORTANTE: fijate que puedo navegar entre los commits de una Pull Request,interesante y nunca lo he hecho.
+
+			VIDEO 76 ACTUALIZANDO NUESTRO FORK
+
+Cuando tenga un fork veré una opción/botón que dice fetch upstream(es un desplegable con las opciones comparar y fetchear).Mediante la subopción de fetchear puedo actualizar el fork contra el upstream cuando quiera.
+NOTA: ahora se llama "sync fork".
+Tras sincronizar los remotos me faltaría hacer el pull al local,ojo.
+
+
+			VIDEO 77 FLUJOS DE TRABAJO
+
+Como practica se nos pide crear una tag,recuerda que:
+>git tag <- para listarlas
+>git tag -d <nombre> borra esa tag
+>git tag -a "" -m "" <- crea una tag con una anotacion y un mensaje
+y despues hay que pushearlas con "git push --tags".
+Por último creamos una release en GitHub
+
+En cuanto a flujos de trabajo,lo de siempre, no trabajar en el master y siempre usar feature/XXX 
 
