@@ -521,3 +521,49 @@ Normalmente el flujo de trabajo mediante feature branchs es lo más común,ya qu
 Puedo probar a crear un file y darle ese naming a una rama feature/xxx y subir la PR.
 NOTA: con git branch -d <rama> borro una rama,con git branch -d -f(o --force) <rama> borro la rama pero sin importar si tuviera trabajo sin commitear(tengo que forzar para saltar el bloqueo inherente de Git)
 
+Recuerda que con git pull --all me traigo todos los remotos de posibles compañeros y que los veo con git branch --all.
+
+				VIDEO 84 RECUPERAR UNA RAMA DE PRODUCCION
+
+Cuando le damos soporte prolongado a una versión en particular o hacemos arreglos en caliente/urgentes puede darse este caso.
+Imaginando por ejemplo el repo de React puede ser que tengan que dar soporte a la version 17 y la 18,a varias versiones,siendo obviamente cada versión una rama.
+Entonces por ejemplo tengo un repo con las ramas version-01 y version-02 y el cliente pide dar soporte a la 02,pero despues cambia de idea y quiere recuperar la 01,la cual habiamos borrado.Hay varias maneras de reconstruir una rama borrada en el remoto:
+
+1: git checkout <tag> <- si la habia tageado(entraré en DETACHED luego git checkout -b <nueva rama>) <- es decir la recupero mediante el hash del tag
+
+2: mediante GitHub(de nuevo con la tag puedo ir a la tag y crear una rama remota)
+
+Desde luego es muy importante taggear las ramas.
+
+			SECCION 09 MILESTONES-ISSUES Y COLABORADORES 
+
+Un Issue en Github es como una pregunta.Un Milestone es como un hito,ayuda a tener datos sobre algo concreto en el tiempo.
+
+NOTA: la pestaña settings está protegida,sólo la veré cuando tenga suficientes permisos en ese repo.
+
+Por defecto un issue es usado para formular preguntas,tratar de depurar bugs,etc
+IMPORTANTE: por defecto en el buscador que veo ahi mismo tengo aplicados dos filtrtos: is:issue is:open <- es decir,que tengan esas dos tags
+
+Como practica creo un par de issues.
+NOTA: puedo crear un checkbox con - [x] o - [ ] <- ojo a los espacios.
+
+Recuerda tmb que GitHub va a crear un indice numerico incremental con la issue asi #1 | #2 que apuntará a la issue.
+En cada issue puedo asignar a varios colaboradores,ver el autor,etc.
+Teoricamente,la issue debe ser cerrada cuando se haya resuelto.
+
+					VIDEO 88 CERRAR UNA ISSUE
+
+Obviamente una forma de cerrar una issue es yendo a ella y dandole en 'close issue' pero realmente deberiamos contrastar que esa issue ha sido resuelta
+Fijate que usar checkboxes puede ser una buena idea y que puedo sacar sub-issues de las tareas de una issue padre
+Además es muy recomendable cerrar el issue con un mensaje,esto si bien parece ljógico es importante.
+
+También puede darse el caso muy común de que un commit resuelva una issue,y se debe referenciar el indice de la issue en el comentario del commit,por ejemplo:
+#3 este commit resuelve la issue #3 etc..
+Esto además hará que el issue tmb apunte al hash del commit(referencias circulares)
+
+NOTA: GitHub va a reconocer la palabra clave "Fixes #4: " cuando un commit tenga un mensaje que empieza por eso como que ese commit resuelve esa issue.
+Como practica subo un commit con esta nomenclatura que cierre una issue cualquiera.
+
+
+
+
