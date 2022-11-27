@@ -563,7 +563,133 @@ Esto además hará que el issue tmb apunte al hash del commit(referencias circul
 
 NOTA: GitHub va a reconocer la palabra clave "Fixes #4: " cuando un commit tenga un mensaje que empieza por eso como que ese commit resuelve esa issue.
 Como practica subo un commit con esta nomenclatura que cierre una issue cualquiera.
+En mi caso fue el merge de la PR el que cerró la issue.Fijate que puedo buscar por is:closed(o simplemente eliminar el is:open) para ver las cerradas.
 
+				VIDEO 90 ISSUE TEMPLATES
 
+Recuerda que desde settings/issues puedo crear Issues mediante plantillas(pudiendo elegir entre bug report,feature request,etc.Fijate que el de bug report es el que me pasaron.
+Simplemente es rellenar la template.
+NOTA:fijate que esto lo que hace es crear una plantilla base para despues abrir futuras issues de forma más rápida.Ciertos repos como los de librerias será muy útil esto.
+
+				VIDEO 91 ETIQUETAR ISSUES 
+
+Etiquetar una issue ayuda mucho a la hora de categorizarla o buscarla rápidemente.Hay muchas labels(a las que puedo cambiar el color)
+IMPORTANTE: aparte de taggear una issue le puedo asignar algun dev para que la revise(siempre que tenga ese permiso).
+
+			VIDEO 92 MILESTONES
+
+Para crear un milestone tengo que crear un issue,pero antes de crearlo le tengo que establecer uno(lo tengo en las opciones de la derecha)
+La idea es que un milestone sea como un agrupador de issues(es más que una simple label,pues puedo ver porcentaje resuelto de la milestone,agruparlos,crear comentarios,filtrar por milestones,...) 
+
+				VIDEO 93 AGREGAR COLABORADORES
+
+Para invitar a colaboradores en settings tengo esa opción.Les llegará un email que deben confirmar
+NOTA: siempre puedo revocar el acceso a cualquier colaborador de mi repo.
+
+				SECCION 10 WIKIS, PROYECTOS Y GITHUB PAGES
+
+En esta sección vamos a ver estas tres funcionalidades(por las cuales otros pagan).
+La parte de las wikis funciona igual que una wikipedia.Puedo usar esta feature para documentar mi aplicación(por ejemplo como arrancar la aplicación, o bien la documentación de usuario final).
+La parte de los proyectos es más compleja,ya que puedo tener varios tipos de proyectos(proyecto base,proyecto macro,...)Un proyecto es como una pizarra,donde puedo definir columnas,estilo (tareas-pendientes, issues pendientes, pull request pendientes,etc).Podría crear columnas para esto.
+Hay gente que crear proyectos por desarrollador.
+La parte de GitHub Pages simplemente permite servir código estático en cada repo.
+
+NOTA: la parte de las Wikis es de pago en repositorio privados(no asi en uno público)
+
+				VIDEO 96 WIKI
+
+Mediante la wiki puedo mostrar a los usuarios como funciona la aplicación.Puedo subir a esa sección un manual de usuario,etc.Obviamente es editable por cualquier colaborador.
+Crea urls únicas,fáciles de compartir.
+NOTA: está todo basado en markdown(fijate que debo investigar maś esta opción al visitar otros repos.
+NOTA: en realidad se puede elegir entre varios pseudo-lenguajes para documentar pero el más usado es markdown.
+Fijate tmb que puedo crear un sidebar de navegación,subir imagenes,etc
+
+		VIDEO 97 AGREGAR REFERENCIAS ENTRE PAGINAS DE LA WIKI
+
+A la hora de hacer una wiki en condiciones casi seguro que tengo que referenciar páginas.Para ello simplemente tengo que crear un enlace mediante el botón correspondiente.Por ejemplo:
+
+[Para mayor información visita esta parte](Home):
+
+Fijate que como tengo una página que se llama Home ya sabe ir,pero puede ser cualquier URL externa.
+
+				VIDEO 98 PROYECTOS DE GITHUB
+
+Esta sección es como un administrador del proyectos(es algo parecido a Jira).Para empezar debo crear un nuevo proyecto,elegir vista(la vista board son tarjetas como Jira).Veré iteraciones sobre esas tareas(sprint)
+NOTA:las vistas son intercambiables en todo momento,no es importante con cual empezar.
+Una vez creado un projecto veré las típicas columnas Todo, InProgress y Done.Puedo crear más,o reordenarlas.
+Fijate tmb que puedo añadir proyectos a un repo,o crearle el proyecto ya directamente.
+NOTA: cada tarea que cree puedo pasarla a un issue,creandolo en el repo.También se puede crear desde un principio una issue usando la referencia de otra(con #hash de la issue).
+
+				VIDEO 99 -100 GITHUB PAGES
+
+GitHub Pages es un hosting gratuito que ofrece GH para montar un sitio web rápidamente en un repo(aunque tiene que ser sólo html+css+js).Es genial para servir una app de React,Angular,Vue,etc...
+NOTA: aparte de tener un dominio por cada repo puedo crear otro sitio web para el usuario en particular(pudiendolo usar como portafolio,claro)
+
+IMPORTANTE: para ello tengo que crear un repo con el nombre:
+Owner   Repository name
+<name>/<name>.github.io
+
+En cuanto a la ruta recuerda que puede ser la raiz o /docs.Alli tengo que subir los estáticos.
+
+					VIDEO 101 PESTAÑA INSIGHTS
+
+Esta pestaña ofrece estadisticas y métricas(como quien ha echo mas commmits,el tráfico de los mismos,ramas abiertas/cerradas,forks que se hicieron,etc).Por ello no tiene mucho sentido en un repositorio pequeño o con un único colaborador
+Para el video simplemente visitamos el de react y vamos a estos insights.
+Alli puedo ver que hay varios tipos de gráficas,etc, es simplemente jugar un poco
+
+				SECCION 11 ORGANIZACIONES Y EQUIPOS EN GH
+
+GH ya ofrece de forma gratuita la posibilidad de trabajar de forma colaborativa,creando organizaciones y dentro de estas equipos.En esta sección veremos esta feature en profundidad
+
+				VIDEO 103 CREANDO UNA ORGANIZACIÓN
+
+Las organizaciones no es más que un grupo de personas que tienen algun objetivo en común.
+NOTA: sólo el dueño de una organización puede eliminar repositorios.
+Bien,para crear una hago click en el icono de + y en 'new organization'.Veré diferentes tiers,eligo el gratuito(pudiendo hacer el upgrade si lo necesitará en un futuro).De todas formas el tier gratuito es perfectamente válido para una organización pequeña e incluso mediana.
+Crearé una con este nombre: OscarGM-DevOpsRocks
+
+Fijate que tras crearla(elegimos no enlazar repo) se ve algo muy parecido a un repo,pero es la pestaña de la organización( puedo verlo porque pone repositories en la segunda tab o people en la 4,etc).Obviamente en la pestaña de people puedo seguir agregando miembros,cambiar roles  o cambiar el ownership de la org.
+
+En la pestaña repositorio puedo agregar repos nuevos.Fijate que hasta ahora todos los repos que he creado son míos,nunca han sido de una organización como lo serían ahora.
+En este punto debo saber distinguir entre repos publicos o privados mios y lo mismo pero de una organización.Ya veremos como mover un repo de una cuenta personal a una organización.
+
+		VIDEO 104 TRANSFERIR EL DOMINIO DE UN REPOSITORIO A UNA ORGANIZACIÓN
+
+Esto no es muy complicado,apenas necesito simplemente el nombre de la organización y del repo.IMPORTANTE: esto es siempre que yo sea el dueño del repo y de la organización.
+Si soy dueño de todo y voy a https://github.com/ (al dashboard general) puedo cambiar entre contextos(user normal o dueño de una org).Es como si el dueño fuera otra usuario independiente
+
+Si eligo el usuario de la org veré varias opciones,una de ellas es 'view organization' que me lleva a la zona general de administración de la org(con las pestañas anteriores people,repos,teams,...).
+
+Bien,pero realmente queremos transferir un repo de un usuario único,asi que elegimos la otra opción(entrar como user normal).Eligo un repo y voy a settings.
+Alli abajo del todo veré la opción de transferir,simplemente pongo el nombre de la organización(también se lo puedo dar a otro usuario de GH)
+
+Como práctica transfiero un repo random.
+Por último fijate que se puede cambiar el nombre de la org cuantas veces se quiera,sin embargo esto puede romper la referencia a la URL ya que usa el name.Se recomienda no hacer muchos cambios
+
+			VIDEO 105 PESTAÑA TEAMS - EQUIPOS DE TRABAJO
+
+Básicamente podemos ver un team como una organización más pequeña dentro de la organización general.Podria haber el team de develop,el de QA,el de marketing,etc.
+NOTA: el team puede ser secreto,siendo sólo visible para ese team.
+
+Asi pues creo un team visible(developers) o los que quiera.
+Fijate que cada team puede agregar miembros de la org a ese team.Se puede estar en varios teams.
+
+En cuanto al nivel de permisos también puedo cambiarlo por cada team(están los tipicos admin,read,write,maintain,...).Obviamente puedo cambiar el rol/permiso de cada team si soy el owner de la organización.En esta práctica,dado que el grupo sería de developers sería buena idea cambiarle a write(o incluso admin) ya que son los developers.
+
+IMPORTANTE: primero hay que agregar un repo al team desde la visión del team.Genial.
+NOTA: fijate que cada team puede agregar subteams,haciendo la organización tan compleja como quiera ser.
+
+También si voy a People puedo ver que tengo una 2FA como autenticación(en realidad la he tenido que meter en GoogleAuthenticator).
+
+				SECCION 12 GISTS - CREAR GISTS
+
+Si bien esta sección es la más pequeña es una de las más útiles.Mediante un gist puedo memorizar casi cualquier cosa.
+IMPORTANTE: un Gist siempre es público,debo tener cuidado lo que publico en él(aunque lo ponga privado eso es sólo para la indexación)
+
+Puedo ver un Gist como un mini-repo,pero se usa más para compartir funciones útiles con otros o para tenerlas para uno mismo,la tipica biblioteca de funciones que considere útiles (fijate que debería usar más esta feature) 
+
+Mediante extensiones de VSC incluso puedo llamar al Gist(lo veremos tmb)
+
+			VIDEO 109 CREANDO UN GIST
 
 
