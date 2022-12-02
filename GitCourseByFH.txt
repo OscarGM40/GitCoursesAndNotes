@@ -684,12 +684,74 @@ También si voy a People puedo ver que tengo una 2FA como autenticación(en real
 				SECCION 12 GISTS - CREAR GISTS
 
 Si bien esta sección es la más pequeña es una de las más útiles.Mediante un gist puedo memorizar casi cualquier cosa.
-IMPORTANTE: un Gist siempre es público,debo tener cuidado lo que publico en él(aunque lo ponga privado eso es sólo para la indexación)
+IMPORTANTE: un Gist siempre es público,debo tener cuidado lo que publico en él(aunque lo ponga privado eso es sólo para la indexación de GH)
 
 Puedo ver un Gist como un mini-repo,pero se usa más para compartir funciones útiles con otros o para tenerlas para uno mismo,la tipica biblioteca de funciones que considere útiles (fijate que debería usar más esta feature) 
 
 Mediante extensiones de VSC incluso puedo llamar al Gist(lo veremos tmb)
 
 			VIDEO 109 CREANDO UN GIST
+
+Para crear un Gist en la interfaz de GH en el icono de + tengo la opción de crear un Gist.De nuevo recuerda que un Gist secreto simplemente no va a aparecer en los resultados de busqueda,pero es accesable igualmente por la URL.
+NOTA: GitHub va a intentar coger la sintaxis del lenguaje conforme a la extensión del archivo que le pase(si es un .dart tratará de usar Dart como lenguaje)
+
+Además de que no hay limite, y que debería usarlos mucho más,GitHub Copilot también los usa para sugerencias,asi que estoy ayudando a los demás.
+
+		VIDEO 110 USANDO PLUGINS DE GIST CON TOKENS PERSONALIZADOS 
+
+Puedo integrar mi IDE preferido con GitHub Gist.Lo haremos con VSC( es entrar en las extensiones,buscar por gist y la del autor llamado Ken Howard.
+
+IMPORTANTE: lo primero que tendré que hacer es seleccionar el profile y crear un token de acceso en GH(ojo,que es desde la sección de Gist y clickando en el avatar tengo la opción 'your github profile'.Ya desde alli puedo ir a settings/developer settings/personal access tokens.
+Asi pues genero uno(el scope solo el checkbox Gist).Le doy el token y un nombre de perfil cuando me lo pidan.Ahora puedo usar 'open gist' y abrir mis Gists en VSC!.Genial.Aparte puedo cargar Gist de otros
+Fijate que esto me abre nuevas formas de programar,siendo buena idea usar masivamente Gists para almacenar código reutilizable.
+También tengo otras opciones como 'Insert text from gist file'
+
+FH recomienda marcar además los Gist más usados como favoritos.Por último fijate que hay más extensiones para Gists,pero esta es la más usada.
+
+HINT: también puedo buscar Gists de forma global mediante el buscador insertando cualquier término(y si encuentro uno que me ayude hacerle fork,etc).
+
+			SECCION 14 AJUSTES DE SEGURIDAD Y DE LA CUENTA(LEGACY)
+
+NOTA: Recuerda que la aplicación Gravatar es para tener un Avatar de forma universal,y que GitHub lo leerá si tengo uno.
+
+		VIDEOS 115-116 AJUSTES DE UNA ORGANIZACIÓN Y DE UN USUARIO
+
+Fijate que tengo la opcion de 'member privileges' para organizaciones(por defecto pueden hacer todo).En una organización real debería bajar permisos y/o darlos por role,etc ( y lo mismo para colaboradores en una cuenta personal) 
+NOTA: recuerda que con los WebHooks puedo ejecutar rutinas en base a eventos y que GitHub tiene esta opción(solo para organizaciones??).
+IMPORTANTE: en una cuenta personal tmb tengo acceso a notificaciones(envio de emails en PRs o merges,etc).También puedo generar una key SSH(lo veremos) o habilitar el 2FA.
+Fijate que en Sessions puedo ver la IP de cualquier host autenticado
+HINT: también puedo bloquear usuarios.
+
+IMPORTANTE: la seccion de Applications es muy importante,ya que puedo ver qué aplicaciones están autenticadas mediante OAuth contra mi cuenta de GitHub y revocar esa auth si fuera necesario
+
+				VIDEO 117 HABILITAR 2FA
+
+Básicamente la autenticación de doble factor agrega una capa más de seguridad a nuestra cuenta.Es altamente recomendable.Para habilitarla es en la sección 'password and authentication'.Puedo usar tanto una app como que GH simplemente me mande un SMS de confirmación en cada proceso(estilo Amazon o PayPal).
+En cuanto a apps hay varias(hay que escanear el QR,etc).Recuerda que hay que descargar los github-recovery-codes y almacenarlos en lugar seguro.
+NOTA: puedo deshabilitar la 2FA siempre que quiera,ojo, y volver al estado anterior
+
+			VIDEO 118 GENERAR UN TOKEN DE ACCESO PERSONAL
+
+Ya lo he hecho varias veces( un token de acceso personal puede reemplazar contraseñas,ya que tiene acceso programático).Simplemente ir a la sección y crear uno,con el acceso que quiera(recuerda limitarlo)
+
+	VIDEO 119-120-121 GENERAR CLAVE SSH Y VERIFICAR LA CONEXION SSH CONTRA GH
+
+En cuanto haya generado una clave ssh en cualquier sistema operativo se creará la carpeta/directorio /home/.ssh.Puedo verlo en Mac o Unix con:
+>ls ~/.ssh
+Si lee el directorio es que he generado una clave ssh ya en ese equipo.
+
+* Si no tengo una clave puedo generarla con(ojo,esto para MacOS/Unix):
+>ssh-keygen -t rsa -C "correo@email.com"  <- -t de type y -C de nombre comun
+
+NOTA: la llave privada por defecto irá a al file ~/.ssh/id_rsa mientras que la pública va a ~/.ssh/id_rsa.pub. También puedo meter un passphase como 2FA adicional
+IMPORTANTE: recuerda que la privada se queda en el host y es la pública la que puedo subir a otros hosts.
+
+Por último,ya en la interfaz de GH voy a SSH and GPG keys y clickeo en New SSH key.Le doy un title y meto la public ssh key en la sección correspondiente.
+Para comprobar si tengo conexión por ssh usar esto:
+>ssh -T git@github.com
+
+Tendría que ver este mensaje donde me reconocen la conexión pero no me dan una shell(si es la primera vez agregar el fingerprint)
+oscar@acer-linux:/media/oscar/CRUCIALX6/GitCoursesFH$ ssh -T git@github.com
+Hi OscarGM40! You've successfully authenticated, but GitHub does not provide shell access.
 
 
