@@ -48,7 +48,7 @@ La representación de salto de línea en archivos puede ser de varias formas: en
 
 			VIDEO 10 RESUMEN Y REVERTIR CAMBIOS
 
-Una vez echo un commit,puedo revertir los cambios al último commit. Tiene que ser un commit al que no le haya echo push:
+Una vez echo un commit,puedo revertir los cambios al último commit. Tiene que ser un commit al que no le haya echo push,entiendo:
 >git checkout -- . <- ojo con el punto
 Git reconstruirá todos los files y directorios a los que esté dando seguimiento al estado de ese commit
 
@@ -121,6 +121,7 @@ Obviamente esto es super útil.
 Imagina que tengo el file instalaciones.md al que le modifico algo.Realmente puede que no me acuerde de lo que habia antes.Pero puedo usar git diff <file>:
 
 >git diff <- dado que solo tengo un file no necesito pasarselo:
+IMPORTANTE: si uso git diff que va a sacar todos los cambios, puede que quiera ser más especifico y pasarle el file o realmente sea lo que quiero
 
 Puedo ver las diferencias en colores
 diff --git a/instalaciones.md b/instalaciones.md
@@ -299,16 +300,9 @@ Desafortunadamente,las estrategias de fast-forward y ort(antes era recursive) no
 
 Es muy fácil simular un conflicto.Simplemente cambio en dos ramas diferentes la misma línea.En cuanto quiera mergear una de ellas en la otra tendré problemas.
 
-<<<<<<< HEAD
-1. Acabar con el plan de Lex Luthor.
-2. Crear la liga de la justicia.
-3. Buscar nuevos miembros que luchen por la justicia.
-4. Buscar comida para ellos.
-=======
 1. Acabar con el plan de Lex Luthor
 2. Crear la liga de la justicia
 3. Buscar nuevos miembros que sean superheroes
->>>>>>> rama-conflicto
 
 Obviamente tengo que solucionarlo.Fijate que despues de resolver los conflictos tengo que añadir y commitear,y que si miro el estado veré UU <- wtf:
 

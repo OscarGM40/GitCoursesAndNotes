@@ -1,0 +1,7 @@
+https://www.youtube.com/watch?v=oJdlGtsbc3U
+Tengo tres iconos, uno de source control, otro de git lens y otro de git lens inspect que abre el inspector
+
+Source Control tiene:
+ -changes
+ - graph
+ - git lens
