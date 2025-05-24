@@ -48,7 +48,7 @@ La representación de salto de línea en archivos puede ser de varias formas: en
 
 			VIDEO 10 RESUMEN Y REVERTIR CAMBIOS
 
-Una vez echo un commit,puedo revertir los cambios al último commit:
+Una vez echo un commit,puedo revertir los cambios al último commit. Tiene que ser un commit al que no le haya echo push:
 >git checkout -- . <- ojo con el punto
 Git reconstruirá todos los files y directorios a los que esté dando seguimiento al estado de ese commit
 
