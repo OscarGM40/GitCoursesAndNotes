@@ -35,5 +35,6 @@ Nuncas hacer un rebase con commits al que le he hecho push (osea hago el commit 
 Para saber si he ya he pusheado una rama puedo verlo con git branch --all 
 
 Squash: junta 2 o más commits en uno solo (https://www.youtube.com/watch?v=3o_01F04bZ4)
+I will have more functionality in this branch, which I want to cherry pick in main
 
 
