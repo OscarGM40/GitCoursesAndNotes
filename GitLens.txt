@@ -31,3 +31,5 @@ Hay que configurar VSCode para que sea el editor del rebase interactive
 
 En cuanto quiera hacer un rebase a otra rama, DESDE LA RAMA QUE QUIERO REBASAR, NO LA OBJETIVO, SINO LA QUE TIENE LOS CAMBIOS =>
 git rebase -i main; <- si es que quiero rebasar main
+Nuncas hacer un rebase con commits al que le he hecho push (osea hago el commit y despues el rebase)
+Para saber si he ya he pusheado una rama puedo verlo con git branch --all y si hay una en remoto pues igual es por eso que se está liadno ahora,wtf
