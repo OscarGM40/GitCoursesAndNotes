@@ -5,3 +5,24 @@ Source Control tiene:
  -changes
  - graph
  - git lens
+
+ https://www.youtube.com/watch?v=3o_01F04bZ4
+
+ I have to install GitLens supercharge extension
+ To rebasing open command palette with 'enable interactive rebase editor' and accept to be able to rebase
+ 
+ Rebasing has these advantages:
+ 1. Take commits from a branch an replay them at the end of another branch
+ 2. This comes in handly to integrate recent commits without merging
+ 3. This results in a cleaner, more linear project 
+
+
+Rebase a branch : va a poner el historial de commits de la rama que rebasa en el último commit de la rama que es rebasada
+56c - ea90 - a26d - d67c -53sd <- rama main
+           | -> 7c2 - 9de <- new feature
+
+56c - ea90 - a26d - d67c -53sd <- rama main
+                           | -> 7c2 - 9de <- new feature           
+
+Diria que es lo mismo que ponerme en la rama y pullear main(o la rama en cuestion)
+No se suele rebasar una rama publica, es muy risky, suele hacerse solo sobre ramas privadas
