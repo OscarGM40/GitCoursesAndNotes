@@ -26,3 +26,8 @@ Rebase a branch : va a poner el historial de commits de la rama que rebasa en el
 
 Diria que es lo mismo que ponerme en la rama y pullear main(o la rama en cuestion)
 No se suele rebasar una rama publica, es muy risky, suele hacerse solo sobre ramas privadas
+Hay que configurar VSCode para que sea el editor del rebase interactive
+> git config --global core.editor "code --wait"
+
+En cuanto quiera hacer un rebase a otra rama, DESDE LA RAMA QUE QUIERO REBASAR, NO LA OBJETIVO, SINO LA QUE TIENE LOS CAMBIOS =>
+git rebase -i main; <- si es que quiero rebasar main
